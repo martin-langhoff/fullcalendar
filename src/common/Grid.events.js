@@ -461,12 +461,12 @@ Grid.mixin({
 				_this.unrenderDrag();
 				enableCursor();
 			},
-			dragStop: function() {
+			dragStop: function(dropEvent) {
 				_this.unrenderDrag();
 				enableCursor();
 
 				if (dropLocation) { // element was dropped on a valid date/time cell
-					_this.view.reportExternalDrop(meta, dropLocation, el, ev, ui);
+					_this.view.reportExternalDrop(meta, dropLocation, el, ev, ui, dropEvent);
 				}
 			},
 			listenStop: function() {
