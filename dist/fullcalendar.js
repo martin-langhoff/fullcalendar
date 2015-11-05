@@ -1,7 +1,7 @@
 /*!
- * FullCalendar v2.4.0
- * Docs & License: http://fullcalendar.io/
- * (c) 2015 Adam Shaw
+ * <%= meta.title %> v<%= meta.version %>
+ * Docs & License: <%= meta.homepage %>
+ * (c) <%= meta.copyright %>
  */
 
 (function(factory) {
@@ -18,7 +18,7 @@
 
 ;;
 
-var fc = $.fullCalendar = { version: "2.4.0" };
+var fc = $.fullCalendar = { version: "<%= meta.version %>" };
 var fcViews = fc.views = {};
 
 
@@ -4157,12 +4157,12 @@ Grid.mixin({
 				_this.unrenderDrag();
 				enableCursor();
 			},
-			dragStop: function() {
+			dragStop: function(dropEvent) {
 				_this.unrenderDrag();
 				enableCursor();
 
 				if (dropLocation) { // element was dropped on a valid date/time cell
-					_this.view.reportExternalDrop(meta, dropLocation, el, ev, ui);
+					_this.view.reportExternalDrop(meta, dropLocation, el, ev, ui, dropEvent);
 				}
 			},
 			listenStop: function() {
@@ -7512,7 +7512,7 @@ var View = fc.View = Class.extend({
 	// Must be called when an external element, via jQuery UI, has been dropped onto the calendar.
 	// `meta` is the parsed data that has been embedded into the dragging event.
 	// `dropLocation` is an object that contains the new start/end/allDay values for the event.
-	reportExternalDrop: function(meta, dropLocation, el, ev, ui) {
+	reportExternalDrop: function(meta, dropLocation, el, ev, ui, dropEv) {
 		var eventProps = meta.eventProps;
 		var eventInput;
 		var event;
@@ -7523,15 +7523,15 @@ var View = fc.View = Class.extend({
 			event = this.calendar.renderEvent(eventInput, meta.stick)[0]; // renderEvent returns an array
 		}
 
-		this.triggerExternalDrop(event, dropLocation, el, ev, ui);
+		this.triggerExternalDrop(event, dropLocation, el, ev, ui, dropEv);
 	},
 
 
 	// Triggers external-drop handlers that have subscribed via the API
-	triggerExternalDrop: function(event, dropLocation, el, ev, ui) {
+	triggerExternalDrop: function(event, dropLocation, el, ev, ui, dropEv) {
 
 		// trigger 'drop' regardless of whether element represents an event
-		this.trigger('drop', el[0], dropLocation.start, ev, ui);
+		this.trigger('drop', el[0], dropLocation.start, ev, ui, dropEv);
 
 		if (event) {
 			this.trigger('eventReceive', null, event); // signal an external event landed
@@ -8957,7 +8957,9 @@ var momComputableOptions = {
 
 
 // options that should be computed off live calendar options (considers override options)
-var instanceComputableOptions = { // TODO: best place for this? related to lang?
+// TODO: best place for this? related to lang?
+// TODO: flipping text based on isRTL is a bad idea because the CSS `direction` might want to handle it
+var instanceComputableOptions = {
 
 	// Produces format strings for results like "Mo 16"
 	smallDayDateFormat: function(options) {
@@ -11168,3 +11170,4 @@ fcViews.agendaWeek = {
 
 return fc; // export for Node/CommonJS
 });
+//@ sourceMappingURL=fullcalendar.js.map
