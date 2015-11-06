@@ -1,7 +1,7 @@
 /*!
- * <%= meta.title %> v<%= meta.version %> Google Calendar Plugin
- * Docs & License: <%= meta.homepage %>
- * (c) <%= meta.copyright %>
+ * FullCalendar v2.4.0 Google Calendar Plugin
+ * Docs & License: http://fullcalendar.io/
+ * (c) 2015 Adam Shaw
  */
  
 (function(factory) {
@@ -178,5 +178,3 @@ function injectQsComponent(url, component) {
 
 
 });
-
-//@ sourceMappingURL=gcal.js.map

@@ -1,7 +1,7 @@
 /*!
- * <%= meta.title %> v<%= meta.version %>
- * Docs & License: <%= meta.homepage %>
- * (c) <%= meta.copyright %>
+ * FullCalendar v2.4.0
+ * Docs & License: http://fullcalendar.io/
+ * (c) 2015 Adam Shaw
  */
 
 (function(factory) {
@@ -18,7 +18,7 @@
 
 ;;
 
-var fc = $.fullCalendar = { version: "<%= meta.version %>" };
+var fc = $.fullCalendar = { version: "2.4.0" };
 var fcViews = fc.views = {};
 
 
@@ -11170,4 +11170,3 @@ fcViews.agendaWeek = {
 
 return fc; // export for Node/CommonJS
 });
-//@ sourceMappingURL=fullcalendar.js.map
